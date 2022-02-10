@@ -46,8 +46,8 @@ garpike and stingray are also present.'''
 oddelovac = "-" * 60
 uzivatele = {"bob" : "123", "ann" : "pass123", "mike" : "password123", "liz" : "pass123" }
 
-uzivatel = "bob"  #(input("username:")).lower()
-heslo = "123"   #input("password:")
+uzivatel = (input("username:")).lower()
+heslo = input("password:")
 
 if uzivatel not in uzivatele.keys() or heslo != uzivatele.get(uzivatel):                         #ověření uživatele
     print("unregistered user, terminating the program..")
@@ -101,6 +101,4 @@ print(oddelovac)
 i = 0
 for slovo in cista_slova:                                                          # sloupcový graf délky slov
     i += 1
-    print(f"{i:3}|","*"*len(slovo),"|", len(slovo))
-    if i == 10:
-        break
+    print("{:>3}|{:<16}|{}".format(i,"*" * len(slovo), len(slovo)))
