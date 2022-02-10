@@ -43,11 +43,11 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
-oddelovac = "-" * 80
+oddelovac = "-" * 60
 uzivatele = {"bob" : "123", "ann" : "pass123", "mike" : "password123", "liz" : "pass123" }
 
-uzivatel = (input("username:")).lower()
-heslo = input("password:")
+uzivatel = "bob"  #(input("username:")).lower()
+heslo = "123"   #input("password:")
 
 if uzivatel not in uzivatele.keys() or heslo != uzivatele.get(uzivatel):                         #ověření uživatele
     print("unregistered user, terminating the program..")
@@ -63,5 +63,44 @@ if cislo_textu not in {"1", "2", "3"} or not cislo_textu.isnumeric():           
     print("Nenapsal jsi číslo, nebo je číslo mimo rozsah volby, terminating the program..")
     exit()
 
-cislo_textu = int(cislo_textu)           # převod načteného řetězce na číslo
 
+TEXT = TEXTS[int(cislo_textu) -1]            # vyberu text, řetězec rozdělím na slova, tá očistím od nežádoucích znaku
+slova_textu = TEXT.split()
+cista_slova = [slovo.strip(",.!?") for slovo in slova_textu]
+
+analyza = {
+    "pocet_slov" : len(cista_slova),
+    "titlecace" : 0,
+    "uppercase" : 0,
+    "lovercase" : 0,
+    "numeric" : 0,
+    "sum_numbers" : 0
+}
+
+for slovo in cista_slova:                                           # dám vypoctené výstupy do slovniku "analyza"
+    if slovo.istitle():
+        analyza["titlecace"] += 1
+    if slovo.isupper() and slovo.isalpha():                         # možna and slovo.isalpha()  nevím "30N"
+        analyza["uppercase"] += 1
+    if slovo.islower():
+        analyza["lovercase"] += 1
+    if slovo.isnumeric():
+        analyza["numeric"] += 1
+        analyza["sum_numbers"] += int(slovo)
+
+
+print("There are {} words in the selected text.".format(analyza["pocet_slov"]))
+print("There are {} titlecase words.".format(analyza["titlecace"]))
+print("There are {} uppercase words.".format(analyza["uppercase"]))
+print("There are {} lowercase words.".format(analyza["lovercase"]))
+print("There are {} numeric strings.".format(analyza["numeric"]))
+print("The sum of all the numbers" ,analyza["sum_numbers"])
+print(oddelovac)
+print("NR.|", "  OCCURENCES  ", "|LEN")
+print(oddelovac)
+i = 0
+for slovo in cista_slova:                                                          # sloupcový graf délky slov
+    i += 1
+    print(f"{i:3}|","*"*len(slovo),"|", len(slovo))
+    if i == 10:
+        break
