@@ -1,7 +1,7 @@
 # autor: Mičulek Martin
 #  ----------------------------| Textový analyzátor |------------------------------------
 
-#  Textový analyzátor - tento program provede jednoduchou analýzu zadaného textu
+# - tento program provede jednoduchou analýzu zadaného textu
 
 #-------------------------------- načtení textu ze souboru ------------------------------
 
@@ -12,6 +12,7 @@ oddelovac = "-" * 60
 uzivatele = {"bob" : "123", "ann" : "pass123", "mike" : "password123", "liz" : "pass123" }
 
 #------------------------------ ověření uživatele a uvítání -----------------------------
+# -------- podmínky tvořím tak, ať nemusím stále posouvat kod odsazováním ---------------
 
 uzivatel = (input("username:")).lower()
 heslo = input("password:")
@@ -59,7 +60,7 @@ for slovo in cista_slova:
         analyza["numeric"] += 1
         analyza["sum_numbers"] += int(slovo)
 
-# -------------------------- výpis rextové analýzy --------------------------------------
+# -------------------------- výpis textové analýzy --------------------------------------
 
 print("There are {} words in the selected text.".format(analyza["pocet_slov"]))
 print("There are {} titlecase words.".format(analyza["titlecase"]))
