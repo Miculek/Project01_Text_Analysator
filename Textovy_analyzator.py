@@ -80,4 +80,4 @@ cetnost_slov_sort = dict( sorted(cetnost_slov.items()))                 #sort po
 print("LEN|", "OCCURENCES".center(18), "|NR.")
 print(oddelovac)
 for klic in cetnost_slov_sort:
-    print("{:>3}|{:<20}|{}".format(klic,"*" * cetnost_slov_sort[klic], cetnost_slov_sort[klic]))
+    print("{:>3}|{:<20}|{}".format(klic, "*" * cetnost_slov_sort[klic], cetnost_slov_sort[klic]))
