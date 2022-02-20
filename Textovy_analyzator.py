@@ -5,8 +5,7 @@
 
 #-------------------------------- načtení textu ze souboru ------------------------------
 
-import task_template
-TEXTS = task_template.TEXTS
+from task_template import TEXTS
 
 oddelovac = "-" * 60
 uzivatele = {"bob" : "123", "ann" : "pass123", "mike" : "password123", "liz" : "pass123" }
@@ -69,10 +68,16 @@ print("There are {} lowercase words.".format(analyza["lowercase"]))
 print("There are {} numeric strings.".format(analyza["numeric"]))
 print("The sum of all the numbers", analyza["sum_numbers"])
 print(oddelovac)
-print("NR.|", "OCCURENCES".center(14), "|LEN")
+
+#-------------------------------- sloupcový graf cetnosti slov --------------------------
+
+cetnost_slov = {}
+for slovo in cista_slova:
+    cetnost_slov[len(slovo)] = cetnost_slov.get(len(slovo), 0) +1
+
+cetnost_slov_sort = dict( sorted(cetnost_slov.items()))           #sort podle klíče
+
+print("LEN|", "OCCURENCES".center(18), "|NR.")
 print(oddelovac)
-
-#----------------------------------- sloupcový graf délky slov --------------------------
-
-for index, slovo in enumerate(cista_slova, 1):
-    print("{:>3}|{:<16}|{}".format(index,"*" * len(slovo), len(slovo)))
+for klic in cetnost_slov_sort:
+    print("{:>3}|{:<20}|{}".format(klic,"*" * cetnost_slov_sort[klic], cetnost_slov_sort[klic]))
