@@ -75,7 +75,7 @@ cetnost_slov = {}
 for slovo in cista_slova:
     cetnost_slov[len(slovo)] = cetnost_slov.get(len(slovo), 0) +1
 
-cetnost_slov_sort = dict( sorted(cetnost_slov.items()))           #sort podle klíče
+cetnost_slov_sort = dict( sorted(cetnost_slov.items()))                 #sort podle klíče
 
 print("LEN|", "OCCURENCES".center(18), "|NR.")
 print(oddelovac)
