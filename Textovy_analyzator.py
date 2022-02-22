@@ -47,6 +47,7 @@ analyza = {
     "numeric" : 0,
     "sum_numbers" : 0
 }
+cetnost_slov = {}
 
 for slovo in cista_slova:
     if slovo.istitle():
@@ -58,6 +59,9 @@ for slovo in cista_slova:
     if slovo.isnumeric():
         analyza["numeric"] += 1
         analyza["sum_numbers"] += int(slovo)
+
+    cetnost_slov[len(slovo)] = cetnost_slov.get(len(slovo), 0) + 1      # klic je délka slova a hodnota je četnost
+
 
 # -------------------------- výpis textové analýzy --------------------------------------
 
@@ -71,13 +75,20 @@ print(oddelovac)
 
 #-------------------------------- sloupcový graf cetnosti slov --------------------------
 
-cetnost_slov = {}
-for slovo in cista_slova:
-    cetnost_slov[len(slovo)] = cetnost_slov.get(len(slovo), 0) +1
+cetnost_slov_sort = dict(sorted(cetnost_slov.items()))                  # sort podle klíče
+max_cetnost = max(cetnost_slov.values())                                # najdu maximální četnost
+max_len = max(cetnost_slov)                                             # najdu maximální délku
+pocet_cislic_max = len(str(max_len))
 
-cetnost_slov_sort = dict( sorted(cetnost_slov.items()))                 #sort podle klíče
+if pocet_cislic_max < 3:
+    pocet_cislic_max = 3                                                # musím ošetřit minimální velikost sloupce na 3 znaky
 
-print("LEN|", "OCCURENCES".center(18), "|NR.")
+print(" "* (pocet_cislic_max -3) + "LEN|", "OCCURENCES".center(max_cetnost), "|NR.")
 print(oddelovac)
 for klic in cetnost_slov_sort:
-    print("{:>3}|{:<20}|{}".format(klic, "*" * cetnost_slov_sort[klic], cetnost_slov_sort[klic]))
+    # sloupec OCCURENCES složim ze stringu "*" a stringu " "
+    OCCURENCES = "*" * cetnost_slov_sort[klic] + " " * (max_cetnost +2 - cetnost_slov_sort[klic])
+    # sloupec LEN složím ze stringu " " a stringu klic
+    LEN = " " * (pocet_cislic_max - len(str(klic))) + str(klic)
+    print("{}|{}|{}".format(LEN, OCCURENCES, cetnost_slov_sort[klic]))
+
